@@ -4,20 +4,26 @@ def my_parser():
 
   parser = argparse.ArgumentParser()
 
-  parser.add_argument('-u', '--url', type=str, help='URL адрес ресурса')
-  parser.add_argument('-n', '--name', type=str, help='Имя ресурса')
-  parser.add_argument('-d', '--description', type=str, help='Описание ресурса')
-  parser.add_argument('-p', '--path', type=str, help='Путь логирования ресурса')
+  parser.add_argument('-u', '--url', help='URL адрес ресурса')
+  parser.add_argument('-n', '--name', help='Имя ресурса')
+  parser.add_argument('-d', '--description', help='Описание ресурса')
+  parser.add_argument('-p', '--path', help='Путь логирования ресурса')
 
   args = parser.parse_args()
 
-  if os.path.exists('/home/runner/Bitlink/parser/links')==False:
-    os.mkdir('/home/runner/Bitlink/parser/links')
+  name_link_file = args.path.split('/')
+  name_dir = '/'.join(name_link_file[:-1])
+  name_file = name_link_file[-1]
+
+  if not os.path.exists(f'{name_dir}'):
+    os.makedirs(f'{name_dir}')
 
   if args.path:
-    with open('parser/links/link.txt', 'a', encoding='utf-8') as file:
+    with open(f'{name_dir}/{name_file}', 'a', encoding='utf-8') as file:
       file.write(f'{args.name} {args.description} - {args.url}\n')
       file.close
 
   print(f'{args.name} {args.description} - {args.url}')
+
+
 
