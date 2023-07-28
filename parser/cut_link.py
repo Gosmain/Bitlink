@@ -2,11 +2,12 @@ import argparse
 import os
 
 
-
 def my_parser():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-u', '--url', help='URL адрес ресурса', required=True)
+    # TODO пересмотреи условия задачи,
+    #  какие арги опциональные, а какие позиционные
     parser.add_argument('-n', '--name', help='Имя ресурса', required=True)
     parser.add_argument('-d', '--description', help='Описание ресурса', required=True)
     parser.add_argument('-p', '--path', help='Путь логирования ресурса')
