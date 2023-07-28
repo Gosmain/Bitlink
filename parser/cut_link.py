@@ -1,29 +1,24 @@
-import argparse, os
+import argparse
+import os
+
 
 def my_parser():
+    parser = argparse.ArgumentParser()
 
-  parser = argparse.ArgumentParser()
+    parser.add_argument('-u', '--url', help='URL адрес ресурса', required=True)
+    parser.add_argument('-n', '--name', help='Имя ресурса', required=True)
+    parser.add_argument('-d', '--description', help='Описание ресурса', required=True)
+    parser.add_argument('-p', '--path', help='Путь логирования ресурса')
 
-  parser.add_argument('-u', '--url', help='URL адрес ресурса')
-  parser.add_argument('-n', '--name', help='Имя ресурса')
-  parser.add_argument('-d', '--description', help='Описание ресурса')
-  parser.add_argument('-p', '--path', help='Путь логирования ресурса')
+    args = parser.parse_args()
 
-  args = parser.parse_args()
+    dir_name = '/'.join(args.path.split('/')[:-1])
 
-  name_link_file = args.path.split('/')
-  name_dir = '/'.join(name_link_file[:-1])
-  name_file = name_link_file[-1]
+    if not os.path.exists(dir_name):
+        os.makedirs(dir_name)
 
-  if not os.path.exists(f'{name_dir}'):
-    os.makedirs(f'{name_dir}')
+    if args.path:
+        with open(f'{args.path}', 'a', encoding='utf-8') as file:
+            file.write(f'{args.name} {args.description} - {args.url}\n')
 
-  if args.path:
-    with open(f'{name_dir}/{name_file}', 'a', encoding='utf-8') as file:
-      file.write(f'{args.name} {args.description} - {args.url}\n')
-      file.close
-
-  print(f'{args.name} {args.description} - {args.url}')
-
-
-
+    print(f'{args.name} {args.description} - {args.url}')
