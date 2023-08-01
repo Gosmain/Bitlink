@@ -1,33 +1,39 @@
 import argparse
 import os
+from bitlink.bitly import short_link
 
+def get_dir_name(path):
+  dir_name = '/'.join(path.split('/')[:-1])
+  return dir_name
 
-def my_parser():
+def create_dir(dir_name):
+  os.makedirs(dir_name)
+
+def enter_info(name, description, short_link,  file_name):
+    if name == description:
+      if name:
+        return f'{name} {description} - {short_link}'
+      else:
+        return f'{short_link}'
+    else:
+      if name:
+        return f'{name} - {short_link}'
+      else:
+        return f'{description} - {short_link}'
+
+def parse_console():
+  
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-u', '--url', help='URL адрес ресурса', required=True)
-    # TODO пересмотреи условия задачи,
-    #  какие арги опциональные, а какие позиционные
-    parser.add_argument('-n', '--name', help='Имя ресурса', required=True)
-    parser.add_argument('-d', '--description', help='Описание ресурса', required=True)
+    parser.add_argument('-n', '--name', help='Имя ресурса')
+    parser.add_argument('-d', '--description', help='Описание ресурса')
     parser.add_argument('-p', '--path', help='Путь логирования ресурса')
 
     args = parser.parse_args()
 
-    dir_name = '/'.join(args.path.split('/')[:-1])
+    return args.name, args.description, short_link(args.url), args.path
+  
+    
 
-    if not os.path.exists(dir_name):
-        os.makedirs(dir_name)
-
-    if args.path:
-        with open(f'{args.path}', 'a', encoding='utf-8') as file:
-            file.write(f'{args.name} {args.description} - {args.url}\n')
-
-    print(f'{args.name} {args.description} - {args.url}')
-
-    # TODO ты как программист после того, как что-то написал должен убедиться, что твое решение работает
-    #  запусти программу с разными параметрами и убедись,
-    #  что она работает согласно бизнес-логике, пока что много падений
-
-    # TODO разбить my_parser() на маленькие ниверсальные функции,
-    #  переименовать переменные name_... на ..._name
+    

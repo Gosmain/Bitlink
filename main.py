@@ -1,12 +1,23 @@
-from bitlink.bitly import short_link
-from parser.cut_link import my_parser
+from parser.cut_link import parse_console, get_dir_name, create_dir, enter_info
+import os
 
 if __name__ == '__main__':
-    # print('Enter an address to create a short link')
-    # url_for_short = input()
-    # print(f'Short link to use:\n{short_link(url_for_short)}')
-    my_parser()
 
-    # TODO добавь в свой проект requirements.txt и почитай для чего это и как с этим работать
+  name, desc, link, file =  parse_console()
 
-    # TODO нет интеграции с сервисом, пока что отсюда запускается только парсер консоли
+  info = enter_info(name, desc, link, file)
+
+  if file:
+
+    dir_name = get_dir_name(file)
+
+    if not os.path.exists(dir_name):
+      create_dir(dir_name)
+    with open(f'{file}', 'a', encoding='utf-8') as file:
+      file.write(f'{info}\n')
+
+  print(info)
+  
+
+
+
