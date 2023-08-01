@@ -18,8 +18,6 @@ if __name__ == '__main__':
             create_dir(dir_name)
 
         with open(args.path, 'a', encoding='utf-8') as f:
-          f.write(f'{info}\n')
+            f.write(f'{info}\n')
 
     print(info)
-
-    

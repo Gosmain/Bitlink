@@ -1,6 +1,7 @@
 import argparse
 import os
 
+
 def get_dir_name(path):
     dir_name = '/'.join(path.split('/')[:-1])
     return dir_name
@@ -11,6 +12,7 @@ def create_dir(dir_name):
 
 
 def enter_info(date_tpl):
+    # TODO date_tpl прям плохо, почему дата(date)? Не забывай, что тип данных в названии не используем
     name, description, short_link = date_tpl
     if name and description:
         if name:
@@ -22,6 +24,8 @@ def enter_info(date_tpl):
             return f'{name} - {short_link}'
         else:
             return f'{description} - {short_link}'
+
+        # TODO подймай, как можно избавиться от огромного дерева ифов
 
 
 def parse_console():
@@ -35,5 +39,3 @@ def parse_console():
     args = parser.parse_args()
 
     return args
-    
-
