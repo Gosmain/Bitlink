@@ -10,7 +10,7 @@ def create_dir(dir_name):
   os.makedirs(dir_name)
 
 def enter_info(name, description, short_link,  file_name):
-    if name == description:
+    if name and description:
       if name:
         return f'{name} {description} - {short_link}'
       else:

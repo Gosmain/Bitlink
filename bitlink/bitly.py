@@ -12,4 +12,4 @@ def short_link(url):
 
     response = requests.post('https://api-ssl.bitly.com/v4/shorten', headers=headers, data=data)
 
-    return response.text
+    return response.json()['id']
