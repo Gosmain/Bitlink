@@ -10,15 +10,21 @@ def get_dir_name(path):
 def create_dir(dir_name):
     os.makedirs(dir_name)
 
+
 def comp(cmp):
-  if cmp == None:
-    return ''
-  else:
-    return cmp
+    if cmp == None:
+        # TODO PEP 8: E711 comparison to None should be 'if cond is None:'
+        #  попробуй через тернанарный оператор сделать эту функцию, получится в одну строку
+        return ''
+    else:
+        return cmp
+
 
 def enter_info(tpl):
+    # TODO tpl переименовать
     name, description, short_link = list(map(comp, tpl))
     return f'{name} {description} - {short_link}'.strip(' -')
+
 
 def parse_console():
     parser = argparse.ArgumentParser()
