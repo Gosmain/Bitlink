@@ -11,18 +11,11 @@ def create_dir(dir_name):
     os.makedirs(dir_name)
 
 
-def comp(cmp):
-    if cmp == None:
-        # TODO PEP 8: E711 comparison to None should be 'if cond is None:'
-        #  попробуй через тернанарный оператор сделать эту функцию, получится в одну строку
-        return ''
-    else:
-        return cmp
+def comparison(comparison_object):
+    return comparison_object if comparison_object else ''
 
-
-def enter_info(tpl):
-    # TODO tpl переименовать
-    name, description, short_link = list(map(comp, tpl))
+def enter_info(data):
+    name, description, short_link = list(map(comparison, data))
     return f'{name} {description} - {short_link}'.strip(' -')
 
 

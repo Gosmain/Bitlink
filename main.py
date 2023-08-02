@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
     args = parse_console()
 
-    my_args = args.name, args.description, short_link(args.url)
+    my_args = args.name, args.description, short_link()
 
     info = enter_info(my_args)
     if args.path:
